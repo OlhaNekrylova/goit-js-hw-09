@@ -6,19 +6,29 @@ const ref = {
 };
 
 let intervalId = null;
-const isActive = false;
+let isActive = false;
 
-ref.startBtn.addEventListener('click', ()  => {
-    const intervalId = setInterval(() => {
-        getRandomHexColor();
+ref.startBtn.addEventListener('click', onStartBtnClick);
+
+ref.stopBtn.addEventListener('click', onStopBtClick);
+
+function  onStartBtnClick (evt) {
+    if (isActive) {
+        return;
+    }
+        
+    isActive = true;
+        
+    intervalId = setInterval(() => {
+        document.body.style.backgroundColor = getRandomHexColor();
     }, 1000);
     
-});
+}
 
-ref.stopBtn.addEventListener('click', () => {
+function onStopBtClick (evt) {
     clearInterval(intervalId); 
-});
-
+    isActive = false;
+}
 
 function getRandomHexColor() {
     return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
