@@ -18,7 +18,7 @@ class Timer{
             return;
         }
     
-        const lastTime = Date.now();
+        const lastTime = Date.now(2022, 12, 21); 
         this.intervalId = setInterval(() => {
             const currentTime = Date.now();
             const deltaTime = lastTime - currentTime;
