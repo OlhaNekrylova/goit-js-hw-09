@@ -24,13 +24,14 @@ function createPromise(position, delay) {
   
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
+    counter = AMOUNT;
 
     const intervalId = setInterval(() => {
-      if (counter === AMOUNT) {
-        clearInterval(intervalId);
-        return;
-      }
-
+      // if (counter === AMOUNT) {
+      //   clearInterval(intervalId);
+      //   return;
+      // }
+      
       if (shouldResolve) {
         resolve();// Fulfill
       } else {
