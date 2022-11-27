@@ -33,6 +33,7 @@ function createPromise(position, delay) {
         reject();// Reject
       }
       position += 1;
+      counter += 1;
     }, delay);
   });
 }
