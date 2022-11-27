@@ -1,33 +1,27 @@
 import '../css/common.css';
 
-const ref = {
+const refs = {
     startBtn : document.querySelector('button[data-start]'),
     stopBtn : document.querySelector('button[data-stop]'),
 };
 
 let intervalId = null;
-let isActive = false;
 
-ref.startBtn.addEventListener('click', onStartBtnClick);
+refs.startBtn.addEventListener('click', onStartBtnClick);
 
-ref.stopBtn.addEventListener('click', onStopBtClick);
+refs.stopBtn.addEventListener('click', onStopBtClick);
 
 function  onStartBtnClick (evt) {
-    if (isActive) {
-        return;
-    }
-        
-    isActive = true;
-        
     intervalId = setInterval(() => {
         document.body.style.backgroundColor = getRandomHexColor();
     }, 1000);
     
+    refs.startBtn.disabled = evt.currentTarget.checked;
 }
 
 function onStopBtClick (evt) {
     clearInterval(intervalId); 
-    isActive = false;
+    refs.startBtn.disabled = evt.currentTarget.checked;
 }
 
 function getRandomHexColor() {

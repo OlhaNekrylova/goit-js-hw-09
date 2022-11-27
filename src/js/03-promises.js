@@ -7,21 +7,22 @@ refs = {
   inputAmount : document.querySelector('input[name="amount"]'),
 };
 
+const firstDelay = refs.inputDelay.value;
+const delayStep = refs.inputStep.value;
+const delay = firstDelay + delayStep;
+const AMOUNT = refs.inputAmount.value;
+let position = 0;
+let counter = 0;
+let intervalId = null;
+
 refs.form.addEventlistener('submit', onFormSubmit);
 
 function createPromise(position, delay) {
-  const delay = firstDelay + delayStep;
-  const firstDelay = refs.inputDdelay.value;
-  const delayStep = refs.inputStep.value;
-  const AMOUNT = refs.inputAmount.value;
-  let position = 0;
-  let counter = 0;
-  let intervalId = null;
-
+  
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
 
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       if (counter === AMOUNT) {
         clearInterval(intervalId);
         return;
