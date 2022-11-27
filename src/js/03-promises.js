@@ -7,6 +7,11 @@ refs = {
   inputAmount : document.querySelector('input[name="amount"]'),
 };
 
+refs.form.addEventlistener('submit', onFormSubmit);
+// refs.inputDdelay.addEventlistener('submit', onFormSubmit);
+// refs.inputStep.addEventlistener('submit', onFormSubmit);
+// refs.inputAmount.addEventlistener('submit', onFormSubmit);
+
 const firstDelay = refs.inputDelay.value;
 const delayStep = refs.inputStep.value;
 const delay = firstDelay + delayStep;
@@ -14,8 +19,6 @@ const AMOUNT = refs.inputAmount.value;
 let position = 0;
 let counter = 0;
 let intervalId = null;
-
-refs.form.addEventlistener('submit', onFormSubmit);
 
 function createPromise(position, delay) {
   
