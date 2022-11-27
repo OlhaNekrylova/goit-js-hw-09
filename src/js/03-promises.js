@@ -31,7 +31,7 @@ function createPromise(position, delay) {
       //   clearInterval(intervalId);
       //   return;
       // }
-      
+
       if (shouldResolve) {
         resolve();// Fulfill
       } else {
@@ -44,7 +44,7 @@ function createPromise(position, delay) {
 }
 
 function onFormSubmit(evt) {
-  createPromise(2, 1500)
+  createPromise(position, delay)
   .then(({ position, delay }) => {
     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
   })
