@@ -24,12 +24,7 @@ function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.3;
     
-    const timeoutId = setTimeout(() => {
-      // if (counter === AMOUNT) {
-      //   clearInterval(intervalId);
-      //   return;
-      // }
-
+    setTimeout(() => {
       if (shouldResolve) {
         resolve({ position, delay });
       } else {
@@ -38,7 +33,7 @@ function createPromise(position, delay) {
       
     }, delay);
   });
-}
+};
 
 function onFormSubmit(evt) {
   evt.preventDefault();
@@ -57,8 +52,8 @@ function onFormSubmit(evt) {
     });
 
     position += 1;
-    delay += step;
+    // delay += step;
   
-}
+};
 
 
