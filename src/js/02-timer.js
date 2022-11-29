@@ -54,8 +54,8 @@ class Timer{
         }
     }
 
-    chooseDate(defaultDate) {
-        if (defaultDate <= currentTime) {
+    chooseDate(selectedDates) {
+        if (selectedDates[0] <= new Date()) {
             Notiflix.Notify.info('Please choose a date in the future');
             refs.startBtn.disabled = false;
         } else  {
