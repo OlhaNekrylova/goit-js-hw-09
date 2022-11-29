@@ -1,10 +1,28 @@
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import '../css/common.css';
+
+Notiflix.Notify.info('Cogito ergo sum');
 
 const refs = {
     stardBtn : document.querySelector('button[data-start]'),
     clockfaceDatetimePicker : document.querySelector('#datetime-picker'),
     clockfaceTimer : document.querySelector('.timer'),
 };
+
+const flatpickr = require("flatpickr");
+const options = {
+    enableTime: true,
+    time_24hr: true,
+    defaultDate: new Date(),
+    minuteIncrement: 1,
+    onClose(selectedDates) {
+    console.log(selectedDates[0]);
+    },
+};
+
+flatpickr('#datetime-picker', options);
 
 class Timer{
     constructor({ onTick }) {
@@ -20,7 +38,7 @@ class Timer{
     
         const lastTime = Date.now(); 
         this.isActive = true;
-        
+
         this.intervalId = setInterval(() => {
             const currentTime = Date.now();
             const deltaTime = lastTime - currentTime;
