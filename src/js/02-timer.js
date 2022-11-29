@@ -3,15 +3,15 @@ import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import '../css/common.css';
 
-Notiflix.Notify.info('Cogito ergo sum');
-
 const refs = {
-    stardBtn : document.querySelector('button[data-start]'),
+    startBtn : document.querySelector('button[data-start]'),
     clockfaceDatetimePicker : document.querySelector('#datetime-picker'),
     clockfaceTimer : document.querySelector('.timer'),
 };
 
 const flatpickr = require("flatpickr");
+
+const selectedDates = [];
 const options = {
     enableTime: true,
     time_24hr: true,
@@ -53,11 +53,21 @@ class Timer{
             this.isActive = false;
         }
     }
+
+    chooseDate(defaultDate) {
+        if (defaultDate <= currentTime) {
+            Notiflix.Notify.info('Please choose a date in the future');
+            refs.startBtn.disabled = false;
+        } else  {
+            selectedDates.push(defaultDate); 
+            refs.startBtn.disabled = true;
+        }
+    };
 };
 
 const timer = new Timer({ onTick : updateClockface });
 
-refs.stardBtn.addEventListener('clicK', () => {
+refs.startBtn.addEventListener('clicK', () => {
     timer.start();
 });
 
