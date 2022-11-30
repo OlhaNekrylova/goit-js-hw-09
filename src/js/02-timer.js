@@ -2,6 +2,7 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import '../css/common.css';
+const flatpickr = require("flatpickr");
 
 const refs = {
     startBtn : document.querySelector('button[data-start]'),
@@ -9,10 +10,12 @@ const refs = {
     clockfaceTimer : document.querySelector('.timer'),
 };
 
-// const flatpickr = require("flatpickr");
+
 
 const selectedDates = [];
-const options = {
+// const options = 
+
+flatpickr('input#datetime-picker', {
     enableTime: true,
     time_24hr: true,
     defaultDate: new Date(),
@@ -20,9 +23,7 @@ const options = {
     onClose(selectedDates) {
     console.log(selectedDates[0]);
     },
-};
-
-flatpickr('input#datetime-picker', options);
+});
 
 class Timer{
     constructor({ onTick }) {
