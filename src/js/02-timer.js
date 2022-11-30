@@ -22,7 +22,7 @@ const options = {
     },
 };
 
-flatpickr('#datetime-picker', options);
+flatpickr('input#datetime-picker', options);
 
 class Timer{
     constructor({ onTick }) {
