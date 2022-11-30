@@ -9,7 +9,7 @@ const refs = {
     clockfaceTimer : document.querySelector('.timer'),
 };
 
-const flatpickr = require("flatpickr");
+// const flatpickr = require("flatpickr");
 
 const selectedDates = [];
 const options = {
