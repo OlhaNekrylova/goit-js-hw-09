@@ -34,19 +34,18 @@ class Timer{
             return;
         }
     
-        const lastTime = Date.now(); 
         this.isActive = true;
 
         this.intervalId = setInterval(() => {
             const currentTime = Date.now();
-            const deltaTime = lastTime - currentTime;
-            convertMs(deltaTime);
-            this.onTick(ms);
+            const deltaTime = selectedDates[0] - currentTime;
+            const time = convertMs(deltaTime);
+            this.onTick(time);
         }, 1000);
     }
 
     stop() {
-        if (lastTime === currentTime) {
+        if (selectedDates[0] === currentTime) {
             clearInterval(this.intervalId);
             this.isActive = false;
         }
@@ -57,7 +56,7 @@ class Timer{
             Notify.info('Please choose a date in the future');
             refs.startBtn.disabled = false;
         } else  {
-            selectedDates.push(defaultDate); 
+            selectedDates.push(new Date()); 
             refs.startBtn.disabled = true;
         }
     };
@@ -70,7 +69,7 @@ refs.startBtn.addEventListener('clicK', () => {
 });
 
 function updateClockface({ days, hours, minutes, seconds }) {
-    refs.clockfaceDatetimePicker.textContent = currentTime;
+    refs.clockfaceDatetimePicker.textContent = `${selectedDates[0]}`;
     refs.clockfaceTimer.textContent = `${days}:${hours}:${minutes}:${seconds}`;
 }
 
