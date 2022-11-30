@@ -10,10 +10,7 @@ const refs = {
     clockfaceTimer : document.querySelector('.timer'),
 };
 
-
-
 const selectedDates = [];
-// const options = 
 
 flatpickr('input#datetime-picker', {
     enableTime: true,
@@ -57,7 +54,7 @@ class Timer{
 
     chooseDate(selectedDates) {
         if (selectedDates[0] <= new Date()) {
-            Notiflix.Notify.info('Please choose a date in the future');
+            Notify.info('Please choose a date in the future');
             refs.startBtn.disabled = false;
         } else  {
             selectedDates.push(defaultDate); 
