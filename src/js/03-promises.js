@@ -48,5 +48,3 @@ function onFormSubmit(evt) {
     delay += step;
   }
 };
-
-
