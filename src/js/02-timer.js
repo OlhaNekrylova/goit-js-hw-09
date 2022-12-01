@@ -11,6 +11,7 @@ const refs = {
 };
 
 const selectedDates = [];
+let lastTime = null;
 
 flatpickr('input#datetime-picker', {
     enableTime: true,
@@ -36,16 +37,18 @@ class Timer{
     
         this.isActive = true;
 
+        const lastTime = selectedDates[0].getTime();
+
         this.intervalId = setInterval(() => {
             const currentTime = Date.now();
-            const deltaTime = selectedDates[0] - currentTime;
+            const deltaTime = lastTime - currentTime;
             const time = convertMs(deltaTime);
             this.onTick(time);
         }, 1000);
     }
 
     stop() {
-        if (selectedDates[0] === currentTime) {
+        if (lastTime === currentTime) {
             clearInterval(this.intervalId);
             this.isActive = false;
         }
@@ -55,7 +58,7 @@ class Timer{
         if (selectedDates[0] <= new Date()) {
             Notify.info('Please choose a date in the future');
             refs.startBtn.disabled = false;
-        } else  {
+        } else {
             selectedDates.push(new Date()); 
             refs.startBtn.disabled = true;
         }
