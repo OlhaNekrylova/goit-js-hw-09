@@ -2,7 +2,6 @@ import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import '../css/common.css';
-// const flatpickr = require("flatpickr");
 
 const refs = {
     startBtn : document.querySelector('button[data-start]'),
@@ -38,7 +37,7 @@ class Timer{
         this.isActive = true;
 
         const lastTime = selectedDates[0].getTime();
-
+        // console.log(lastTime);
         this.intervalId = setInterval(() => {
             const currentTime = Date.now();
             const deltaTime = lastTime - currentTime;
