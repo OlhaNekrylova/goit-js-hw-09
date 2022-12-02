@@ -10,7 +10,7 @@ const refs = {
 };
 
 const selectedDates = [];
-let lastTime = null;
+let upDate = null;
 
 flatpickr('input#datetime-picker', {
     enableTime: true,
@@ -19,8 +19,18 @@ flatpickr('input#datetime-picker', {
     minuteIncrement: 1,
     onClose(selectedDates) {
     console.log(selectedDates[0]);
+    if (selectedDates[0] <= new Date()) {
+        Notify.info('Please choose a date in the future');
+        refs.startBtn.disabled = true;
+    } 
+    selectedDates.push(new Date()); 
+    
+    upDate = selectedDates[0].getTime();
+    console.log(upDate);
+    refs.startBtn.disabled = false;
+    }
     },
-});
+);
 
 class Timer{
     constructor({ onTick }) {
@@ -36,13 +46,17 @@ class Timer{
     
         this.isActive = true;
 
-        const lastTime = selectedDates[0].getTime();
-        // console.log(lastTime);
+        const lastTime = upDate;
+        
         this.intervalId = setInterval(() => {
             const currentTime = Date.now();
             const deltaTime = lastTime - currentTime;
+            console.log('c', currentTime);
+            console.log('l', lastTime);   
+            console.log('d', deltaTime);            
             const time = convertMs(deltaTime);
             this.onTick(time);
+            console.log('t', time);
         }, 1000);
     }
 
@@ -52,26 +66,19 @@ class Timer{
             this.isActive = false;
         }
     }
-
-    chooseDate(selectedDates) {
-        if (selectedDates[0] <= new Date()) {
-            Notify.info('Please choose a date in the future');
-            refs.startBtn.disabled = false;
-        } else {
-            selectedDates.push(new Date()); 
-            refs.startBtn.disabled = true;
-        }
-    };
 };
 
 const timer = new Timer({ onTick : updateClockface });
 
-refs.startBtn.addEventListener('clicK', () => {
+refs.startBtn.addEventListener('clicK', onStartBtnClick);
+
+function onStartBtnClick () {
+    // evt.preventDefault();
     timer.start();
-});
+}
 
 function updateClockface({ days, hours, minutes, seconds }) {
-    refs.clockfaceDatetimePicker.textContent = `${selectedDates[0]}`;
+    refs.clockfaceDatetimePicker.textContent = `${deltaTime}`;
     refs.clockfaceTimer.textContent = `${days}:${hours}:${minutes}:${seconds}`;
 }
 
