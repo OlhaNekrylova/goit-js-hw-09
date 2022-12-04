@@ -61,16 +61,18 @@ class Timer{
     }
 
     stop() {
-        if (lastTime === currentTime) {
+        if (deltaTime < 1000) {
             clearInterval(this.intervalId);
             this.isActive = false;
         }
     }
 };
 
+// lastTime === currentTime)
+
 const timer = new Timer({ onTick : updateClockface });
 
-refs.startBtn.addEventListener('clicK', onStartBtnClick);
+refs.startBtn.addEventListener('click', onStartBtnClick);
 
 function onStartBtnClick () {
     // evt.preventDefault();
@@ -78,8 +80,8 @@ function onStartBtnClick () {
 }
 
 function updateClockface({ days, hours, minutes, seconds }) {
-    refs.clockfaceDatetimePicker.textContent = `${deltaTime}`;
-    refs.clockfaceTimer.textContent = `${days}:${hours}:${minutes}:${seconds}`;
+    // refs.clockfaceDatetimePicker.textContent = `${deltaTime}`;
+    refs.clockfaceTimer.textContent = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
 }
 
 function addLeadingZero(value) {
