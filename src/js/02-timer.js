@@ -11,6 +11,7 @@ const refs = {
 
 const selectedDates = [];
 let upDate = null;
+let deltaTime = null; 
 
 flatpickr('input#datetime-picker', {
     enableTime: true,
@@ -68,15 +69,13 @@ class Timer{
     }
 };
 
-// lastTime === currentTime)
-
 const timer = new Timer({ onTick : updateClockface });
 
 refs.startBtn.addEventListener('click', onStartBtnClick);
 
 function onStartBtnClick () {
     // evt.preventDefault();
-    timer.start();
+    timer.start(); 
 }
 
 function updateClockface({ days, hours, minutes, seconds }) {
