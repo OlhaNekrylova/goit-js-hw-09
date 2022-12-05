@@ -54,18 +54,16 @@ class Timer{
             const deltaTime = lastTime - currentTime;
             console.log('c', currentTime);
             console.log('l', lastTime);   
-            console.log('d', deltaTime);            
+            console.log('d', deltaTime);  
             const time = convertMs(deltaTime);
+                if (deltaTime <= 1000) {
+                    clearInterval(this.intervalId);
+                    this.isActive = false;
+                }
+            
             this.onTick(time);
             console.log('t', time);
-        }, 1000);
-    }
-
-    stop() {
-        if (deltaTime < 1000) {
-            clearInterval(this.intervalId);
-            this.isActive = false;
-        }
+        }, 1000); 
     }
 };
 
@@ -79,7 +77,6 @@ function onStartBtnClick () {
 }
 
 function updateClockface({ days, hours, minutes, seconds }) {
-    // refs.clockfaceDatetimePicker.textContent = `${deltaTime}`;
     refs.clockfaceTimer.textContent = `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
 }
 
